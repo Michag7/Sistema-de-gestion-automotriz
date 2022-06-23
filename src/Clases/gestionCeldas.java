@@ -10,13 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-/**
- * Esta clase permite gestionar la tabla y los eventos realizados sobre ella
- * cada celda seria un objeto personalizable
- *
- * @author CHENAO
- *
- */
+
 public class gestionCeldas extends DefaultTableCellRenderer {
 
     private String tipo = "text";
@@ -27,7 +21,7 @@ public class gestionCeldas extends DefaultTableCellRenderer {
     //etiqueta que almacenará el icono a mostrar
     private JLabel label = new JLabel();
     //iconos disponibles para ser mostrados en la etiqueta dependiendo de la columna que lo contenga
-    private ImageIcon iconoVerContrato = new ImageIcon(getClass().getResource("/Imagenes/buscar-archivo.png"));
+    private ImageIcon iconoVerContrato = new ImageIcon(getClass().getResource("/Imagenes/verContratoo.png"));
     private ImageIcon iconoSeleccionar = new ImageIcon(getClass().getResource("/Imagenes/selectperson.png"));
     private ImageIcon iconoEliminar = new ImageIcon(getClass().getResource("/Imagenes/delete .png"));
     private ImageIcon iconoSelectcar = new ImageIcon(getClass().getResource("/Imagenes/selectcar.png"));

@@ -53,7 +53,6 @@ public class panelCliente extends javax.swing.JPanel {
 
         campoFiltro.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         campoFiltro.setForeground(new java.awt.Color(204, 204, 204));
-        campoFiltro.setText("Ingrese el nombre del cliente a buscar");
         campoFiltro.setBorder(null);
         campoFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {

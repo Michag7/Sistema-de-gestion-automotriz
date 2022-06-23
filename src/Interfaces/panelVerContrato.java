@@ -52,7 +52,7 @@ public class panelVerContrato extends javax.swing.JPanel {
         jLabel2.setText("Codigo :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
-        codigoL.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        codigoL.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel1.add(codigoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 320, 30));
 
         jSeparator1.setBackground(new java.awt.Color(54, 38, 87));
@@ -63,7 +63,7 @@ public class panelVerContrato extends javax.swing.JPanel {
         jLabel3.setText("Tipo :");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
-        tipoL.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        tipoL.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel1.add(tipoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 320, 30));
 
         jSeparator2.setBackground(new java.awt.Color(54, 38, 87));
@@ -73,7 +73,7 @@ public class panelVerContrato extends javax.swing.JPanel {
         jLabel4.setText("Inicio :");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
 
-        inicioL.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        inicioL.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel1.add(inicioL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 320, 30));
 
         jSeparator3.setBackground(new java.awt.Color(54, 38, 87));
@@ -83,7 +83,7 @@ public class panelVerContrato extends javax.swing.JPanel {
         jLabel5.setText("Fin :");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 50, -1));
 
-        finL.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        finL.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel1.add(finL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 360, 30));
 
         jSeparator4.setBackground(new java.awt.Color(54, 38, 87));
@@ -96,7 +96,7 @@ public class panelVerContrato extends javax.swing.JPanel {
         jLabel6.setText(" Jornada :");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
 
-        jornadaL.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jornadaL.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel1.add(jornadaL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 370, 30));
 
         jSeparator6.setBackground(new java.awt.Color(54, 38, 87));
@@ -106,7 +106,7 @@ public class panelVerContrato extends javax.swing.JPanel {
         jLabel7.setText("Salario :");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 90, -1));
 
-        salarioL.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        salarioL.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel1.add(salarioL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 360, 30));
 
         jSeparator7.setBackground(new java.awt.Color(54, 38, 87));

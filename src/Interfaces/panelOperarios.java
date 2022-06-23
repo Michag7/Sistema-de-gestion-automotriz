@@ -32,7 +32,7 @@ public class panelOperarios extends javax.swing.JPanel implements MouseListener 
         tablaOperarios.getTableHeader().setOpaque(false);
         tablaOperarios.getTableHeader().setBackground(Color.GREEN);
         tablaOperarios.addMouseListener(this);
-        
+
         TextPrompt campo1 = new TextPrompt("Ingrese el Operario a buscar...", campoFiltro);
 
         tablaOperarios.setRowHeight(25);
@@ -197,12 +197,18 @@ public class panelOperarios extends javax.swing.JPanel implements MouseListener 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                panelModificarOperario p1 = new panelModificarOperario();
+                int fila = tablaOperarios.getSelectedRow();
 
-                operario.seleccionarOperario(tablaOperarios, p1.getCampoIdentificacion(), p1.getCampoNombre(), p1.getCampoApellido(),
-                        p1.getCampoTelefono(), p1.getCampoCorreo(), p1.getCampoCiudad(), p1.getCampoLocalidad(), p1.getCampoCargo(), p1.getComboboxGenero());
+                if (fila >= 0) {
+                    panelModificarOperario p1 = new panelModificarOperario();
 
-                showPanel(p1);
+                    operario.seleccionarOperario(tablaOperarios, p1.getCampoIdentificacion(), p1.getCampoNombre(), p1.getCampoApellido(),
+                            p1.getCampoTelefono(), p1.getCampoCorreo(), p1.getCampoCiudad(), p1.getCampoLocalidad(), p1.getCampoCargo(), p1.getComboboxGenero());
+
+                    showPanel(p1);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+                }
 
             }
         });

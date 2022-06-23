@@ -11,11 +11,25 @@ import Clases.Vehiculo.Tipo;
 import Clases.gestionCeldas;
 import Conexion.CConexion;
 import static Interfaces.MenuP.content;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -631,8 +645,180 @@ public class panelFacturacion extends javax.swing.JPanel implements MouseListene
             pos++;
         }
 
-        panelFacturacion p1 = new panelFacturacion();
-        showPanel(p1);
+        Document documento = new Document();
+
+        try {
+
+            String ruta = System.getProperty("user.home");
+
+            PdfWriter.getInstance((com.itextpdf.text.Document) documento, new FileOutputStream(ruta + "/Desktop/" + campoNombre.getText().trim() + " " + campoApellido.getText().trim()+ " - " +LocalDate.now().toString()+  ".pdf"));
+
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/Imagenes/logoFacttt.png");
+            header.scaleToFit(600, 1000);
+            header.setAlignment(Chunk.ALIGN_CENTER);
+
+            Paragraph parrafo5 = new Paragraph();
+            parrafo5.setAlignment(Paragraph.ALIGN_LEFT);
+            parrafo5.add(" Fecha : "+ LocalDate.now().toString()+". \n \n");
+            parrafo5.setFont(FontFactory.getFont("Roboto", 30, Font.BOLD, BaseColor.DARK_GRAY));
+
+            documento.open();
+            documento.add(header);
+            documento.add(parrafo5);
+            
+            
+            Paragraph parrafo = new Paragraph();
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.add(" \n Información del cliente \n \n");
+            parrafo.setFont(FontFactory.getFont("Roboto", 14, Font.BOLD, BaseColor.DARK_GRAY));
+
+            
+            documento.add(parrafo);
+
+            PdfPTable tablaCliente = new PdfPTable(6);
+            tablaCliente.addCell("Identificacion");
+            tablaCliente.addCell("Nombre");
+            tablaCliente.addCell("Apellido");
+            tablaCliente.addCell("Télefono");
+            tablaCliente.addCell("Palmira");
+            tablaCliente.addCell("Dirección");
+
+            CConexion objetoConexion = new CConexion();
+
+            String sql = "select cid,c_nombre,c_apellido,c_telefono,c_ciudad,c_direccion from cliente where cid = " + Integer.parseInt(campoIdentificacion.getText()) + ";";
+
+            Statement st;
+            try {
+                st = objetoConexion.establecerConexion().createStatement();
+
+                ResultSet rs = st.executeQuery(sql);
+
+                while (rs.next()) {
+
+                    tablaCliente.addCell(rs.getString(1));
+                    tablaCliente.addCell(rs.getString(2));
+                    tablaCliente.addCell(rs.getString(3));
+                    tablaCliente.addCell(rs.getString(4));
+                    tablaCliente.addCell(rs.getString(5));
+                    tablaCliente.addCell(rs.getString(6));
+
+                    documento.add(tablaCliente);
+                }
+
+                Paragraph parrafo2 = new Paragraph();
+                parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
+                parrafo2.add("\n \n Informacion Vehiculo \n \n");
+                parrafo2.setFont(FontFactory.getFont("Roboto", 14, Font.BOLD, BaseColor.DARK_GRAY));
+
+                documento.add(parrafo2);
+
+                PdfPTable tablaVehiculo = new PdfPTable(5);
+                tablaVehiculo.addCell("Placa");
+                tablaVehiculo.addCell("Marca");
+                tablaVehiculo.addCell("Modelo");
+                tablaVehiculo.addCell("Color");
+                tablaVehiculo.addCell("Tipo");
+
+                try {
+
+                    CConexion objetoConexion2 = new CConexion();
+
+                    String sql2 = "select * from vehiculo where v_placa = '" + campoPlaca.getText() + "';";
+
+                    Statement st2;
+
+                    st2 = objetoConexion2.establecerConexion().createStatement();
+
+                    ResultSet rs2 = st2.executeQuery(sql2);
+
+                    while (rs2.next()) {
+
+                        tablaVehiculo.addCell(rs2.getString(1));
+                        tablaVehiculo.addCell(rs2.getString(2));
+                        tablaVehiculo.addCell(rs2.getString(3));
+                        tablaVehiculo.addCell(rs2.getString(4));
+                        tablaVehiculo.addCell(rs2.getString(5));
+
+                        documento.add(tablaVehiculo);
+
+                    }
+
+                    Paragraph parrafo3 = new Paragraph();
+                    parrafo3.setAlignment(Paragraph.ALIGN_CENTER);
+                    parrafo3.add("\n \n Servicios \n \n");
+                    parrafo3.setFont(FontFactory.getFont("Roboto", 14, Font.BOLD, BaseColor.DARK_GRAY));
+
+                    documento.add(parrafo3);
+
+                    PdfPTable tablaServicios = new PdfPTable(4);
+                    tablaServicios.addCell("Codigo");
+                    tablaServicios.addCell("Descripcion");
+                    tablaServicios.addCell("Costo");
+                    tablaServicios.addCell("Operario");
+
+                    try {
+
+                        int poss = 0;
+
+                        while (poss < listaActividades.size()) {
+
+                            Actividad elemento = listaActividades.get(poss);
+
+                            String sid = elemento.getCodigo();
+                            CConexion objetoConexion3 = new CConexion();
+
+                            String sql3 = "select * from servicio where sid = '" + sid + "';";
+
+                            Statement st3;
+
+                            st3 = objetoConexion3.establecerConexion().createStatement();
+
+                            ResultSet rs3 = st3.executeQuery(sql3);
+
+                            while (rs3.next()) {
+
+                                tablaServicios.addCell(rs3.getString(1));
+                                tablaServicios.addCell(rs3.getString(2));
+                                tablaServicios.addCell("$ " + rs3.getString(3));
+                                tablaServicios.addCell(rs3.getString(4));
+
+                            }
+
+                            poss++;
+                        }
+
+                        documento.add(tablaServicios);
+
+                        Paragraph parrafo4 = new Paragraph();
+                        parrafo4.setAlignment(Paragraph.ALIGN_RIGHT);
+                        parrafo4.add("\n \n Valor total: $"+valorCalculado+"                   \n \n");
+                        parrafo4.setFont(FontFactory.getFont("Roboto", 25, Font.BOLD, BaseColor.BLACK));
+
+                        documento.add(parrafo4);
+
+                    } catch (SQLException e) {
+
+                        System.err.println("Error al cargar servicios " + e);
+                    }
+
+                } catch (SQLException e) {
+                    System.err.println("Error al cargar vehiculo " + e);
+                }
+
+            } catch (SQLException e) {
+                System.err.print("Error al obtener datos del clientes. " + e);
+            }
+
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte creado correctamente.");
+
+        } catch (DocumentException | IOException e) {
+            System.err.println("Error en PDF o ruta de imagen" + e);
+            JOptionPane.showMessageDialog(null, "Error al generar PDF, contacte al administrador");
+        }
+
+//        panelFacturacion p1 = new panelFacturacion();
+//        showPanel(p1);
     }//GEN-LAST:event_generarFLMouseClicked
 
     private void campoColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoColorActionPerformed
@@ -929,8 +1115,6 @@ public class panelFacturacion extends javax.swing.JPanel implements MouseListene
         if (columna == 3) {
 
             int motivoMultaIndex = tablaServicios.getSelectedRow();
-
-            
 
             Actividad actividad = listaActividades.get(motivoMultaIndex);
             listaActividades.remove(actividad);
