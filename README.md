@@ -47,8 +47,7 @@ CONTACTO PROVEEDORES
 ---------------------------------------------------------
  - Michel Andrey Gallo Perés - +57 3184027018
  - Brayan Camilo Urrea Jurado - +57 3234699595
- - Sebastián Marulanda Cardenás +57 3146400670
- - Cristian Johan Salazar Caicedo - +57 3178855386
+
 
 
 
