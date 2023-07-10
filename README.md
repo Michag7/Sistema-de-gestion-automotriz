@@ -1,7 +1,6 @@
-# ProyectoFinal
+#Gestor de Taller Automotriz
 
-
-README
+INTRODUCCIÓN
 -------------------------------
 Este software se desarrollo con la finalidad de implementar un sistema que propicie las necesidades que implica la gestión de un taller mecánico automotriz.
 
